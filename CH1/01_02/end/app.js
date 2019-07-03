@@ -1,3 +1,16 @@
+let mixin ={
+    madeIn(){
+        console.log('this car was made in 2019');
+    }
+}
+
+let carMixin ={
+__proto__:mixin, 
+madeIn(){
+    super.madeIn();
+}
+};
+
 class Car {
     constructor(doors, engine, color) {
         this.doors = doors;
@@ -23,16 +36,21 @@ class SUV extends Car{
         this.brand=brand;
         this.wheels =4;
         this.ac=true;
+
+        // assign mixin 
+        Object.assign(this,carMixin);
+
  }
  mybrand(){
      return `this suv is a ${this.brand}`;
  }
 }
 
-const cx5 = new SUV( 4, 'V6', 'grey','cool');
+const cx5 = new SUV( 4, 'V6', 'grey','cool'  );
+console.log(cx5.madeIn());
 const cx6 =new Car(6,'rt','green');
 //console.log(Car.totalDoors(cx5,cx6));  
-console.log(cx5);
+//console.log(cx5);
 //console.log(cx6.carStats())
 
 
